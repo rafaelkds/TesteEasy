@@ -1,0 +1,13 @@
+﻿<template>
+    <require from="./teste"></require>
+    <h1>${message}</h1>
+    <br>
+    ${talento.nome}
+    <teste></teste>
+    <form submit.delegate="">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" value.bind="talento.nome" class="form-control"/>
+        </div>
+    </form>
+</template>
