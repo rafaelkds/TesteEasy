@@ -9,6 +9,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Api.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace Api
 {
@@ -39,8 +45,22 @@ namespace Api
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddMvc();
+            /*
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigin"));
+            });
+            */
             
+
             services.AddDbContext<EasyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EasyDatabase")));
         }
 
@@ -50,9 +70,57 @@ namespace Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            //app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+            
+            app.UseExceptionHandler(
+                 options =>
+                 {
+                     options.Run(
+                     async context =>
+                     {
+                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                         context.Response.ContentType = "application/json";
+                         var ex = context.Features.Get<IExceptionHandlerFeature>();
+                         if (ex != null)
+                         {
+                             var err = ex.Error.Message;
+                             await context.Response.WriteAsync(JsonConvert.SerializeObject(new
+                             {
+                                 error = new
+                                 {
+                                     message = ex.Error.Message,
+                                     exception = ex.Error.GetType().Name
+                                 }
+                             })).ConfigureAwait(false);
+                             
+                         }
+                     });
+                 });
+            
+            /*
+            app.UseExceptionHandler(
+                 options =>
+                 {
+                     options.Run(
+                     async context =>
+                     {
+                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                         context.Response.ContentType = "text/html";
+                         var ex = context.Features.Get<IExceptionHandlerFeature>();
+                         if (ex != null)
+                         {
+                             var err = $"<h1>Error: {ex.Error.Message}</h1>{ex.Error.StackTrace }";
+                             await context.Response.WriteAsync(err).ConfigureAwait(false);
+                         }
+                     });
+                 });
+            */
+
             app.UseApplicationInsightsRequestTelemetry();
 
             app.UseApplicationInsightsExceptionTelemetry();
+
+            app.UseCors("MyPolicy");
 
             app.UseMvc();
         }

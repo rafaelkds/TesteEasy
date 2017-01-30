@@ -17,9 +17,11 @@ namespace Api.Controllers
         [HttpGet]
         public IEnumerable<Candidato> Get()
         {
+            throw new Exception("sdjfhgsdjhfgtdsd");
             using (var context = (EasyContext)this.HttpContext.RequestServices.GetService(typeof(EasyContext)))
             {
-                return context.Candidatos.ToArray();            }
+                return context.Candidatos.ToArray();
+            }
         }
 
         // GET api/candidato/5
