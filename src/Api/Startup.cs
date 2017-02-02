@@ -15,6 +15,7 @@ using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Api
 {
@@ -44,7 +45,7 @@ namespace Api
         {
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
-
+            
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
@@ -52,14 +53,7 @@ namespace Api
                        .AllowAnyHeader();
             }));
 
-            services.AddMvc();
-            /*
-            services.Configure<MvcOptions>(options =>
-            {
-                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigin"));
-            });
-            */
-            
+            services.AddMvc();            
 
             services.AddDbContext<EasyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EasyDatabase")));
         }
@@ -70,8 +64,10 @@ namespace Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            //app.UseMiddleware(typeof(ErrorHandlingMiddleware));
-            
+
+            app.UseCors("MyPolicy");
+
+
             app.UseExceptionHandler(
                  options =>
                  {
@@ -80,47 +76,27 @@ namespace Api
                      {
                          context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                          context.Response.ContentType = "application/json";
+                         context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                         
                          var ex = context.Features.Get<IExceptionHandlerFeature>();
                          if (ex != null)
                          {
                              var err = ex.Error.Message;
                              await context.Response.WriteAsync(JsonConvert.SerializeObject(new
                              {
-                                 error = new
-                                 {
-                                     message = ex.Error.Message,
-                                     exception = ex.Error.GetType().Name
-                                 }
+                                exception = ex.Error.GetType().Name,
+                                message = ex.Error.Message,
+                                stackTrace = ex.Error.StackTrace
                              })).ConfigureAwait(false);
                              
                          }
                      });
                  });
             
-            /*
-            app.UseExceptionHandler(
-                 options =>
-                 {
-                     options.Run(
-                     async context =>
-                     {
-                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                         context.Response.ContentType = "text/html";
-                         var ex = context.Features.Get<IExceptionHandlerFeature>();
-                         if (ex != null)
-                         {
-                             var err = $"<h1>Error: {ex.Error.Message}</h1>{ex.Error.StackTrace }";
-                             await context.Response.WriteAsync(err).ConfigureAwait(false);
-                         }
-                     });
-                 });
-            */
 
             app.UseApplicationInsightsRequestTelemetry();
 
             app.UseApplicationInsightsExceptionTelemetry();
-
-            app.UseCors("MyPolicy");
 
             app.UseMvc();
         }

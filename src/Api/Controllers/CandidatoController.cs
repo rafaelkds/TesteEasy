@@ -15,12 +15,13 @@ namespace Api.Controllers
     {
         // GET: api/candidato
         [HttpGet]
-        public IEnumerable<Candidato> Get()
+        //public IEnumerable<Candidato> Get()
+        public IActionResult Get()
         {
-            throw new Exception("sdjfhgsdjhfgtdsd");
+            //throw new Exception("sdjfhgsdjhfgtdsd");
             using (var context = (EasyContext)this.HttpContext.RequestServices.GetService(typeof(EasyContext)))
             {
-                return context.Candidatos.ToArray();
+                return Ok(context.Candidatos.ToArray());
             }
         }
 
