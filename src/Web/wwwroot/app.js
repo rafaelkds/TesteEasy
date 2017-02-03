@@ -1,21 +1,10 @@
-﻿import {Client} from './client';
-
-export class App {
-    constructor() {
-        this.message = 'Welcome to Aurelia!';
-    }
-    
-    buscar() {
-        new Client().get('candidato', this.sucesso, this.fracasso);
-
-    }
-
-    sucesso(data){
-        console.log(data);
-    }
-
-    fracasso(erro){
-        console.log(erro);
+﻿export class App {
+    configureRouter(config, router) {
+        this.router = router;
+        config.title = 'Cadastro Candidatos Easy';
+        config.map([
+          { route: ['', 'cadastrar'],  name: 'cadastro',   moduleId: 'cadastro' }
+        ]);
     }
 
 }

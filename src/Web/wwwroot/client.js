@@ -1,4 +1,4 @@
-﻿import {HttpClient} from 'aurelia-fetch-client';
+﻿import {HttpClient, json} from 'aurelia-fetch-client';
 
 export class Client {
     constructor(){
@@ -23,5 +23,21 @@ export class Client {
                     fracasso(data);
                 }));
         
+    }
+
+    post(recurso, dados, sucesso, fracasso){
+        this.client.fetch(recurso, {
+            method: 'POST',
+            body: json(dados)
+        })
+            .then(response =>
+                sucesso()
+            )
+            .catch(function(error){
+                error.json().then(data => {
+                    data.status = error.status;
+                    data.ok = error.ok;
+                    fracasso(data);
+                })});
     }
 }

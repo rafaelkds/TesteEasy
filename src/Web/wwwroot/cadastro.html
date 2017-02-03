@@ -1,0 +1,82 @@
+﻿<template>
+    <form submit.delegate="cadastrar()">
+        <div class="form-group">
+            <label for="nome">Endereço de e-mail:</label>
+            <input type="email" id="email" value.bind="candidato.email" class="form-control" required/>
+
+            <label for="nome">Nome/Name:</label>
+            <input type="text" id="nome" value.bind="candidato.nome" class="form-control" required/>
+
+            <label for="skype">Skype: (please create an account if you don't have yet / bom criar caso não tenha)</label>
+            <input type="text" id="skype" value.bind="candidato.skype" class="form-control" required/>
+
+            <label for="whatsapp">Telefone/Phone (Whatsapp):</label>
+            <input type="text" id="whatsapp" value.bind="candidato.whatsapp" class="form-control" required />
+
+            <label for="linkedin">Linkedin:</label>
+            <input type="text" id="linkedin" value.bind="candidato.linkedin" class="form-control" />
+
+            <label for="cidade">Cidade/City:</label>
+            <input type="text" id="cidade" value.bind="candidato.cidade" class="form-control" required />
+
+            <label for="estado">Estado/State:</label>
+            <input type="text" id="estado" value.bind="candidato.estado" class="form-control" required />
+
+            <label for="portfolio">Portfolio</label>
+            <input type="text" id="portfolio" value.bind="candidato.portfolio" class="form-control" />
+
+            <label>What is your willingness to work today? / Qual é sua disponibilidade para trabalhar hoje?</label>
+            <label>
+                <input type="checkbox" checked.bind="candidato.horasAteQuatro">
+                Up to 4 hours per day / Até 4 horas por dia
+            </label>
+            <label>
+                <input type="checkbox" checked.bind="candidato.horasQuatroASeis">
+                4 to 6 hours per day / De 4 á 6 horas por dia
+            </label>
+            <label>
+                <input type="checkbox" checked.bind="candidato.horasSeisAOito">
+                6 to 8 hours per day /De 6 á 8 horas por dia
+            </label>
+            <label>
+                <input type="checkbox" checked.bind="candidato.horasAcimaDeOito">
+                Up to 8 hours a day (are you sure?) / Acima de 8 horas por dia (tem certeza?)
+            </label>
+            <label>
+                <input type="checkbox" checked.bind="candidato.horasFimDeSemana">
+                Only weekends / Apenas finais de semana
+            </label>
+
+            <label>What's the best time to work for you? / Pra você qual é o melhor horário para trabalhar?</label>
+            <label>
+                <input type="checkbox" checked.bind="candidato.periodoManha">
+                Morning (from 08:00 to 12:00) / Manhã (de 08:00 ás 12:00)
+            </label>
+            <label>
+                <input type="checkbox" checked.bind="candidato.periodoTarde">
+                Afternoon (from 1:00 p.m. to 6:00 p.m.) / Tarde (de 13:00 ás 18:00)
+            </label>
+            <label>
+                <input type="checkbox" checked.bind="candidato.periodoNoite">
+                Night (7:00 p.m. to 10:00 p.m.) /Noite (de 19:00 as 22:00)
+            </label>
+            <label>
+                <input type="checkbox" checked.bind="candidato.periodoMadrugada">
+                Dawn (from 10 p.m. onwards) / Madrugada (de 22:00 em diante)
+            </label>
+            <label>
+                <input type="checkbox" checked.bind="candidato.periodoComercial">
+                Business (from 08:00 a.m. to 06:00 p.m.) / Comercial (de 08:00 as 18:00)
+            </label>
+
+            <label for="pretensao">What is your hourly salary requirements? / Qual sua pretensão salarial por hora?</label>
+            <input type="number" id="pretensao" value.bind="candidato.pretensao" class="form-control" required min="1"/>
+
+            <label for="banco">Bank Information / Paypal / Itau etc</label>
+            <span>Banco brasileiro precisa: Nome, CPF, Banco, Agencia, Conta Corrente ou Poupanca</span>
+            <input type="text" id="banco" value.bind="candidato.banco" class="form-control" />
+
+            <button type="submit">Cadastrar</button>
+        </div>
+    </form>
+</template>
