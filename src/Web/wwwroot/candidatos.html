@@ -1,0 +1,23 @@
+﻿<template>    
+    <table class="table table-hover">
+        <tr>
+            <th>Opções</th>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+        </tr>
+        <tr repeat.for="pessoa of pessoas">
+            <td>
+                <a role="button" class="btn btn-primary btn-xs active" href="#/editar/${pessoa.id}">Editar</a>
+                <button type="button" class="btn btn-danger btn-xs active" click.trigger="excluir(pessoa.id)">Excluir</button>
+            </td>
+            <td>${pessoa.id}</td>
+            <td>${pessoa.nome}</td>
+            <td>${pessoa.email}</td>
+            <td>${pessoa.cidade}</td>
+            <td>${pessoa.estado}</td>
+        </tr>
+    </table>
+</template>

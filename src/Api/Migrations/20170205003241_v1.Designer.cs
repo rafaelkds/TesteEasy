@@ -8,9 +8,10 @@ using Api.Context;
 namespace Api.Migrations
 {
     [DbContext(typeof(EasyContext))]
-    partial class EasyContextModelSnapshot : ModelSnapshot
+    [Migration("20170205003241_v1")]
+    partial class v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")

@@ -16,27 +16,29 @@ namespace Api.Controllers
         // GET: api/candidato
         [HttpGet]
         //public IEnumerable<Candidato> Get()
-        public IActionResult Get()
+        public Candidato[] Get()
         {
-            //throw new Exception("sdjfhgsdjhfgtdsd");
             using (var context = (EasyContext)this.HttpContext.RequestServices.GetService(typeof(EasyContext)))
             {
-                return Ok(context.Candidatos.ToArray());
+                return context.Candidatos.ToArray();
             }
         }
 
         // GET api/candidato/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Candidato Get(int id)
         {
-            return "value";
+            using (var context = (EasyContext)this.HttpContext.RequestServices.GetService(typeof(EasyContext)))
+            {
+                return context.Candidatos.FirstOrDefault(c => c.Id == id);
+            }
         }
 
         // POST api/candidato
         [HttpPost]
         public void Post([FromBody]Candidato candidato)
         {
-            using(var context = (EasyContext)this.HttpContext.RequestServices.GetService(typeof(EasyContext)))
+            using (var context = (EasyContext)this.HttpContext.RequestServices.GetService(typeof(EasyContext)))
             {
                 context.Candidatos.Add(candidato);
 
@@ -46,14 +48,36 @@ namespace Api.Controllers
 
         // PUT api/candidato/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]Candidato candidato)
         {
+            using (var context = (EasyContext)this.HttpContext.RequestServices.GetService(typeof(EasyContext)))
+            {
+                if (candidato != null)
+                {
+                    candidato.Id = id;
+
+                    context.Update(candidato);
+
+                    context.SaveChanges();
+                }
+            }
         }
 
         // DELETE api/candidato/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            using (var context = (EasyContext)this.HttpContext.RequestServices.GetService(typeof(EasyContext)))
+            {
+                var candidato = context.Candidatos.FirstOrDefault(c => c.Id == id);
+
+                if (candidato != null)
+                {
+                    context.Candidatos.Remove(candidato);
+
+                    context.SaveChanges();
+                }
+            }
         }
     }
 }

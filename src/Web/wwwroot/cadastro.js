@@ -1,7 +1,19 @@
 ﻿import {Client} from './client';
 
 export class Cadastro {
-    //candidato = {};
+        
+    constructor(){
+        this.niveisConhecimento = [0, 1, 2, 3, 4, 5];
+        this.pagina = 1;
+    }
+
+    activate(params) {
+        new Client().get('candidato/'+params.id)
+            .then(data => this.candidato = data.data)
+            .catch(data => {
+                console.log(data)
+            });
+    }
 
     cadastrar() {
         if(!this.candidato.horasAteQuatro && !this.candidato.horasQuatroASeis && !this.candidato.horasSeisAOito 
@@ -12,15 +24,30 @@ export class Cadastro {
             && !this.candidato.periodoMadrugada && !this.candidato.periodoComercial)
             return;
 
-
-        new Client().post('candidato', this.candidato, this.sucesso, this.fracasso);
+        if(!this.candidato.id) {
+            new Client().post('candidato', this.candidato)
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(data => {
+                    console.log(data);
+                });
+        } else {
+            new Client().put('candidato/'+this.candidato.id, this.candidato)
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(data => {
+                    console.log(data);
+                });
+        }
     }
 
-    sucesso(){
-        console.log("GRAVOU");
+    proxima(){
+        this.pagina++;
     }
 
-    fracasso(erro){
-        console.log(erro);
+    voltar(){
+        this.pagina--;
     }
 }
