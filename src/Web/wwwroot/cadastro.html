@@ -1,5 +1,23 @@
 ﻿<template>
-    <form submit.delegate="cadastrar()">
+    <div class="d-flex flex-column bg-primary mb-4">
+        <div class="py-2 px-4 text-white">
+            <h3 show.bind="pagina == 1">Basic Information / Informações básicas</h3>
+            <h3 show.bind="pagina == 2">Bank Information / Informação bancária</h3>
+            <h3 show.bind="pagina == 3">Knowledge / Conhecimentos</h3>
+        </div>
+        <div class="py-2 px-4 bg-faded">
+            <p show.bind="pagina == 1"><a href="https://www.youtube.com/watch?v=teXgoCzunVE" target="_blank">https://www.youtube.com/watch?v=teXgoCzunVE</a></p>
+            <p show.bind="pagina == 1">We appreciate your contact, check that you do not need to fill out the full form if already has this information on its linkedin, and check out the links at the end of the tutorials (developers).</p>
+            <p show.bind="pagina == 1">Já agradecemos o seu contato, confira que você não precisa preencher o formulario completo caso ja tenha essas informações no seu linkedin, e no final confira os links dos tutoriais (developers).</p>
+            <p show.bind="pagina == 1">How we work / Como trabalhamos: <a href="https://docs.google.com/document/d/145QuJ8-efr-pmNGV-2DOOGHD-1dc3MERSeL5g0XoqmM" target="_blank">https://docs.google.com/document/d/145QuJ8-efr-pmNGV-2DOOGHD-1dc3MERSeL5g0XoqmM</a></p>
+            <p show.bind="pagina == 2">You can choose to receive your payment through Paypal, PagSeguro or conventional bank accounts / Você pode optar em receber seu pagamento pelo Paypal, PagSeguro ou contas bancarias convencionais</p>
+            <p show.bind="pagina == 3">Rate yourself from 0 to 5 for the knowledge specified below, and that's okay if you do not know many things, the important thing is to be honest! / Avalie-se de 0 a 5 quanto aos conhecimentos especificados abaixo, e tudo bem se não souber de muitas coisas, o importante é que seja sincero!</p>
+        </div>
+    </div>
+
+    <p class="text-danger px-4">*Mandatory/Obrigatório</p>
+
+    <form class="px-4" submit.delegate="cadastrar()">
         
         <div show.bind="pagina == 1">
             <div class="form-group">
@@ -163,233 +181,17 @@
         </div>
 
         <div show.bind="pagina == 3">
-            <p>Rate yourself from 0 to 5 for the knowledge specified below, and that's okay if you do not know many things, the important thing is to be honest! / Avalie-se de 0 a 5 quanto aos conhecimentos especificados abaixo, e tudo bem se não souber de muitas coisas, o importante é que seja sincero!</p>
-
-            <div class="form-group">
-                <h5>Ionic</h5>
+            
+            <div class="form-group" repeat.for="tecnologia of tecnologias">
+                <h5>${tecnologia.titulo}</h5>
                 <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioIonic" model.bind="nivel" checked.bind="candidato.conhecimentoIonic" required> ${nivel}
+                <label class="radio-inline px-2" repeat.for="nivel of niveisConhecimento">
+                    ${nivel}<br><input type="radio" name="radio${tecnologia.parametro}" model.bind="nivel" 
+                                    checked.bind="candidato['conhecimento'+tecnologia.parametro]" required>
                 </label>
                 <span>Senior</span>
             </div>
-
-            <div class="form-group">
-                <h5>Android</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioAndroid" model.bind="nivel" checked.bind="candidato.conhecimentoAndroid" required> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>IOS</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioIos" model.bind="nivel" checked.bind="candidato.conhecimentoIos" required> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>HTML</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioHtml" model.bind="nivel" checked.bind="candidato.conhecimentoHtml"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>CSS</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioCss" model.bind="nivel" checked.bind="candidato.conhecimentoCss"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>Bootstrap</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioBootstrap" model.bind="nivel" checked.bind="candidato.conhecimentoBootstrap" required> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>Jquery</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioJquery" model.bind="nivel" checked.bind="candidato.conhecimentoJquery" required> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>AngularJs</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioAngular" model.bind="nivel" checked.bind="candidato.conhecimentoAngular" required> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>Java</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioJava" model.bind="nivel" checked.bind="candidato.conhecimentoJava"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>Asp.Net MVC</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioAsp" model.bind="nivel" checked.bind="candidato.conhecimentoAsp" required> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>C</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioC" model.bind="nivel" checked.bind="candidato.conhecimentoC"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>C++</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioCplusplus" model.bind="nivel" checked.bind="candidato.conhecimentoCplusplus"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>Cake</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioCake" model.bind="nivel" checked.bind="candidato.conhecimentoCake"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>Django</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioDjango" model.bind="nivel" checked.bind="candidato.conhecimentoDjango"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>Majento</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioMajento" model.bind="nivel" checked.bind="candidato.conhecimentoMajento"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>PHP</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioPhp" model.bind="nivel" checked.bind="candidato.conhecimentoPhp" required> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>Wordpress</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioWordpress" model.bind="nivel" checked.bind="candidato.conhecimentoWordpress" required> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>Python</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioPython" model.bind="nivel" checked.bind="candidato.conhecimentoPython"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>Ruby</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioRuby" model.bind="nivel" checked.bind="candidato.conhecimentoRuby"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>SQL Server</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioSqlServer" model.bind="nivel" checked.bind="candidato.conhecimentoSqlServer"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>MySQL</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioMySql" model.bind="nivel" checked.bind="candidato.conhecimentoMySql"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>Salesforce</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioSalesforce" model.bind="nivel" checked.bind="candidato.conhecimentoSalesforce"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>Photoshop</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioPhotoshop" model.bind="nivel" checked.bind="candidato.conhecimentoPhotoshop"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>Illustrator</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioIllustrator" model.bind="nivel" checked.bind="candidato.conhecimentoIllustrator"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
-            <div class="form-group">
-                <h5>SEO</h5>
-                <span>Nao conheco / I don't know</span>
-                <label class="radio-inline" repeat.for="nivel of niveisConhecimento">
-                    <input type="radio" name="radioSeo" model.bind="nivel" checked.bind="candidato.conhecimentoSeo"> ${nivel}
-                </label>
-                <span>Senior</span>
-            </div>
-
+            
             <div class="form-group">
                 <h5 for="conhecimentoOutros">Do you know any other language or framework that was not listed above? Tell us and evaluate yourself from 0 to 5. / Conhece mais alguma linguagem ou framework que não foi listado aqui em cima? Conte para nos e se auto avalie ainda de 0 a 5.</h5>
                 <input type="text" id="conhecimentoOutros" value.bind="candidato.conhecimentoOutros" class="form-control" />

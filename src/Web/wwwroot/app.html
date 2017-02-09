@@ -1,8 +1,9 @@
 ﻿<template>
-    <nav>
-        <ul>
-            <li repeat.for="row of router.navigation">
-                <a href.bind="row.href">${row.title}</a>
+    <h1 class="my-4 px-4">Banco de Talentos - Easy Communication & Technology</h1>
+    <nav class="mb-3">
+        <ul class="nav nav-tabs px-5">
+            <li class="nav-item" repeat.for="row of router.navigation">
+                <a class="nav-link ${row.isActive ? 'active' : ''}" href.bind="row.href">${row.title}</a>
             </li>
         </ul>
     </nav>
