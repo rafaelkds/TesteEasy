@@ -18,6 +18,7 @@ namespace Api.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Candidato>().HasKey(c => c.Id);
+            modelBuilder.Entity<Candidato>().HasOne(c => c.Conhecimento);
             modelBuilder.Entity<Candidato>().Property(c => c.Nome).HasMaxLength(100).IsRequired();
             modelBuilder.Entity<Candidato>().Property(c => c.Email).HasMaxLength(100).IsRequired();
             modelBuilder.Entity<Candidato>().Property(c => c.Skype).HasMaxLength(20).IsRequired();
@@ -37,7 +38,8 @@ namespace Api.Context
             modelBuilder.Entity<Candidato>().Property(c => c.PeriodoMadrugada).IsRequired();
             modelBuilder.Entity<Candidato>().Property(c => c.PeriodoComercial).IsRequired();
             modelBuilder.Entity<Candidato>().Property(c => c.Pretensao).IsRequired();
-            
+            modelBuilder.Entity<Candidato>().Property(c => c.Banco).HasMaxLength(200);
+
             modelBuilder.Entity<Candidato>().Property(c => c.BancoBeneficiario).HasMaxLength(100);
             modelBuilder.Entity<Candidato>().Property(c => c.BancoCpf).HasMaxLength(14);
             modelBuilder.Entity<Candidato>().Property(c => c.BancoNome).HasMaxLength(100);
@@ -46,15 +48,16 @@ namespace Api.Context
             modelBuilder.Entity<Candidato>().Property(c => c.BancoContaPoupanca);
             modelBuilder.Entity<Candidato>().Property(c => c.BancoConta).HasMaxLength(20);
 
-            modelBuilder.Entity<Candidato>().Property(c => c.ConhecimentoIonic).IsRequired();
-            modelBuilder.Entity<Candidato>().Property(c => c.ConhecimentoAndroid).IsRequired();
-            modelBuilder.Entity<Candidato>().Property(c => c.ConhecimentoIos).IsRequired();
-            modelBuilder.Entity<Candidato>().Property(c => c.ConhecimentoBootstrap).IsRequired();
-            modelBuilder.Entity<Candidato>().Property(c => c.ConhecimentoJquery).IsRequired();
-            modelBuilder.Entity<Candidato>().Property(c => c.ConhecimentoAngular).IsRequired();
-            modelBuilder.Entity<Candidato>().Property(c => c.ConhecimentoAsp).IsRequired();
-            modelBuilder.Entity<Candidato>().Property(c => c.ConhecimentoPhp).IsRequired();
-            modelBuilder.Entity<Candidato>().Property(c => c.ConhecimentoWordpress).IsRequired();
+            modelBuilder.Entity<Conhecimento>().Property(c => c.Ionic).IsRequired();
+            modelBuilder.Entity<Conhecimento>().Property(c => c.Android).IsRequired();
+            modelBuilder.Entity<Conhecimento>().Property(c => c.Ios).IsRequired();
+            modelBuilder.Entity<Conhecimento>().Property(c => c.Bootstrap).IsRequired();
+            modelBuilder.Entity<Conhecimento>().Property(c => c.Jquery).IsRequired();
+            modelBuilder.Entity<Conhecimento>().Property(c => c.Angular).IsRequired();
+            modelBuilder.Entity<Conhecimento>().Property(c => c.Asp).IsRequired();
+            modelBuilder.Entity<Conhecimento>().Property(c => c.Php).IsRequired();
+            modelBuilder.Entity<Conhecimento>().Property(c => c.Wordpress).IsRequired();
+            modelBuilder.Entity<Conhecimento>().Property(c => c.Outros).HasMaxLength(500);
         }
     }
 }

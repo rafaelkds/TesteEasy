@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Api.Context;
 using Api.Entities;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,7 +31,7 @@ namespace Api.Controllers
         {
             using (var context = (EasyContext)this.HttpContext.RequestServices.GetService(typeof(EasyContext)))
             {
-                return context.Candidatos.FirstOrDefault(c => c.Id == id);
+                return context.Candidatos.Include(c => c.Conhecimento).FirstOrDefault(c => c.Id == id);
             }
         }
 

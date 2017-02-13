@@ -3,34 +3,34 @@
 export class Cadastro {
 
     constructor(){
-        this.candidato = {};
+        this.candidato = { conhecimento: {} };
         this.niveisConhecimento = [0, 1, 2, 3, 4, 5];
         this.tecnologias = [
-            {titulo: 'Ionic', parametro: 'Ionic'},
-            {titulo: 'Android', parametro: 'Android'},
-            {titulo: 'IOS', parametro: 'Ios'},
-            {titulo: 'HTML', parametro: 'Html'},
-            {titulo: 'CSS', parametro: 'Css'},
-            {titulo: 'Bootstrap', parametro: 'Bootstrap'},
-            {titulo: 'JQuery', parametro: 'Jquery'},
-            {titulo: 'AngularJS', parametro: 'Angular'},
-            {titulo: 'Java', parametro: 'Java'},
-            {titulo: 'Asp.Net MVC', parametro: 'Asp'},
-            {titulo: 'C', parametro: 'C'},
-            {titulo: 'C++', parametro: 'Cplusplus'},
-            {titulo: 'Cake', parametro: 'Cake'},
-            {titulo: 'Django', parametro: 'Django'},
-            {titulo: 'Majento', parametro: 'Majento'},
-            {titulo: 'PHP', parametro: 'Php'},
-            {titulo: 'Wordpress', parametro: 'Wordpress'},
-            {titulo: 'Python', parametro: 'Python'},
-            {titulo: 'Ruby', parametro: 'Ruby'},
-            {titulo: 'SQL Server', parametro: 'SqlServer'},
-            {titulo: 'MySQL', parametro: 'MySql'},
-            {titulo: 'Salesforce', parametro: 'Salesforce'},
-            {titulo: 'Photoshop', parametro: 'Photoshop'},
-            {titulo: 'Illustrator', parametro: 'Illustrator'},
-            {titulo: 'SEO', parametro: 'Seo'}
+            {titulo: 'Ionic', parametro: 'ionic', obrigatorio: true},
+            {titulo: 'Android', parametro: 'android', obrigatorio: true},
+            {titulo: 'IOS', parametro: 'ios', obrigatorio: true},
+            {titulo: 'HTML', parametro: 'html', obrigatorio: false},
+            {titulo: 'CSS', parametro: 'css', obrigatorio: false},
+            {titulo: 'Bootstrap', parametro: 'bootstrap', obrigatorio: true},
+            {titulo: 'JQuery', parametro: 'jquery', obrigatorio: true},
+            {titulo: 'AngularJS', parametro: 'angular', obrigatorio: true},
+            {titulo: 'Java', parametro: 'java', obrigatorio: false},
+            {titulo: 'Asp.Net MVC', parametro: 'asp', obrigatorio: true},
+            {titulo: 'C', parametro: 'c', obrigatorio: false},
+            {titulo: 'C++', parametro: 'cplusplus', obrigatorio: false},
+            {titulo: 'Cake', parametro: 'cake', obrigatorio: false},
+            {titulo: 'Django', parametro: 'django', obrigatorio: false},
+            {titulo: 'Majento', parametro: 'majento', obrigatorio: false},
+            {titulo: 'PHP', parametro: 'php', obrigatorio: true},
+            {titulo: 'Wordpress', parametro: 'wordpress', obrigatorio: true},
+            {titulo: 'Python', parametro: 'python', obrigatorio: false},
+            {titulo: 'Ruby', parametro: 'ruby', obrigatorio: false},
+            {titulo: 'SQL Server', parametro: 'sqlServer', obrigatorio: false},
+            {titulo: 'MySQL', parametro: 'mySql', obrigatorio: false},
+            {titulo: 'Salesforce', parametro: 'salesforce', obrigatorio: false},
+            {titulo: 'Photoshop', parametro: 'photoshop', obrigatorio: false},
+            {titulo: 'Illustrator', parametro: 'illustrator', obrigatorio: false},
+            {titulo: 'SEO', parametro: 'seo', obrigatorio: false}
         ];
         this.pagina = 1;
     }
@@ -47,7 +47,10 @@ export class Cadastro {
     cadastrar() {
         if(!this.candidato.horasAteQuatro && !this.candidato.horasQuatroASeis && !this.candidato.horasSeisAOito 
             && !this.candidato.horasAcimaDeOito && !this.candidato.horasFimDeSemana)
+        {
+            $('#myModal').modal('show');
             return;
+        }
 
         if(!this.candidato.periodoManha && !this.candidato.periodoTarde && !this.candidato.periodoNoite 
             && !this.candidato.periodoMadrugada && !this.candidato.periodoComercial)

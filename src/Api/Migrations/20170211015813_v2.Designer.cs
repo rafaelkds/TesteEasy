@@ -8,9 +8,10 @@ using Api.Context;
 namespace Api.Migrations
 {
     [DbContext(typeof(EasyContext))]
-    partial class EasyContextModelSnapshot : ModelSnapshot
+    [Migration("20170211015813_v2")]
+    partial class v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -21,8 +22,7 @@ namespace Api.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Banco")
-                        .HasMaxLength(200);
+                    b.Property<string>("Banco");
 
                     b.Property<string>("BancoAgencia")
                         .HasMaxLength(20);
@@ -145,8 +145,7 @@ namespace Api.Migrations
 
                     b.Property<int?>("MySql");
 
-                    b.Property<string>("Outros")
-                        .HasMaxLength(500);
+                    b.Property<string>("Outros");
 
                     b.Property<int?>("Photoshop");
 
