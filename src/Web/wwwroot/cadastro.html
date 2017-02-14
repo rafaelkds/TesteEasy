@@ -17,11 +17,11 @@
 
     <p class="text-danger px-4">*Mandatory/Obrigatório</p>
 
-    <form class="px-4" submit.delegate="cadastrar()">
+    <form id="form-candidato" class="px-4" submit.delegate="cadastrar(this)">
         
-        <div show.bind="pagina == 1">
+        <div if.bind="pagina == 1">
             <div class="form-group">
-                <h5 for="nome">Endereço de e-mail:<span class="text-danger">*</span></h5>
+                <h5 for="email">Endereço de e-mail:<span class="text-danger">*</span></h5>
                 <input type="email" id="email" value.bind="candidato.email" class="form-control" required maxlength="100"/>
             </div>
 
@@ -64,31 +64,31 @@
             <h5>What is your willingness to work today? / Qual é sua disponibilidade para trabalhar hoje?<span class="text-danger">*</span></h5>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" checked.bind="candidato.horasAteQuatro">
+                    <input type="checkbox" checked.bind="candidato.horasAteQuatro" name="grupo-horas">
                     Up to 4 hours per day / Até 4 horas por dia
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" checked.bind="candidato.horasQuatroASeis">
+                    <input type="checkbox" checked.bind="candidato.horasQuatroASeis" name="grupo-horas">
                     4 to 6 hours per day / De 4 á 6 horas por dia
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" checked.bind="candidato.horasSeisAOito">
+                    <input type="checkbox" checked.bind="candidato.horasSeisAOito" name="grupo-horas">
                     6 to 8 hours per day /De 6 á 8 horas por dia
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" checked.bind="candidato.horasAcimaDeOito">
+                    <input type="checkbox" checked.bind="candidato.horasAcimaDeOito" name="grupo-horas">
                     Up to 8 hours a day (are you sure?) / Acima de 8 horas por dia (tem certeza?)
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" checked.bind="candidato.horasFimDeSemana">
+                    <input type="checkbox" checked.bind="candidato.horasFimDeSemana" name="grupo-horas">
                     Only weekends / Apenas finais de semana
                 </label>
             </div>
@@ -96,31 +96,31 @@
             <h5>What's the best time to work for you? / Pra você qual é o melhor horário para trabalhar?<span class="text-danger">*</span></h5>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" checked.bind="candidato.periodoManha">
+                    <input type="checkbox" checked.bind="candidato.periodoManha" name="grupo-periodo">
                     Morning (from 08:00 to 12:00) / Manhã (de 08:00 ás 12:00)
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" checked.bind="candidato.periodoTarde">
+                    <input type="checkbox" checked.bind="candidato.periodoTarde" name="grupo-periodo">
                     Afternoon (from 1:00 p.m. to 6:00 p.m.) / Tarde (de 13:00 ás 18:00)
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" checked.bind="candidato.periodoNoite">
+                    <input type="checkbox" checked.bind="candidato.periodoNoite" name="grupo-periodo">
                     Night (7:00 p.m. to 10:00 p.m.) /Noite (de 19:00 as 22:00)
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" checked.bind="candidato.periodoMadrugada">
+                    <input type="checkbox" checked.bind="candidato.periodoMadrugada" name="grupo-periodo">
                     Dawn (from 10 p.m. onwards) / Madrugada (de 22:00 em diante)
                 </label>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" checked.bind="candidato.periodoComercial">
+                    <input type="checkbox" checked.bind="candidato.periodoComercial" name="grupo-periodo">
                     Business (from 08:00 a.m. to 06:00 p.m.) / Comercial (de 08:00 as 18:00)
                 </label>
             </div>
@@ -137,7 +137,7 @@
             </div>
         </div>
 
-        <div show.bind="pagina == 2">
+        <div if.bind="pagina == 2">
             <div class="form-group">
                 <h5 for="bancoBeneficiario">Name / Nome:</h5>
                 <input type="text" id="bancoBeneficiario" value.bind="candidato.bancoBeneficiario" class="form-control" maxlength="100"/>
@@ -180,7 +180,7 @@
             </div>
         </div>
 
-        <div show.bind="pagina == 3">
+        <div if.bind="pagina == 3">
             
             <div class="form-group" repeat.for="tecnologia of tecnologias">
                 <h5>${tecnologia.titulo}<span if.bind="tecnologia.obrigatorio" class="text-danger">*</span></h5>
@@ -200,28 +200,27 @@
             <div class="form-group">
                 <p>Enter the link here CRUD (create, update, delete)- read information in the welcome document quoted in the form description./ Insira aqui o link do CRUD (create, update, delete)- ler informações no documento de Boas Vindas citado na descrição do formulário.</p>
                 <h5 for="linkCrud">Link CRUD</h5>
-                <input type="text" id="linkCrud" value.bind="candidato.linkCrud" class="form-control" />
+                <input type="text" id="linkCrud" value.bind="candidato.linkCrud" class="form-control" maxlength="200"/>
             </div>
 
             <p>Uma cópia das suas respostas será enviada para o endereço de e-mail fornecido</p>
         </div>
 
         <button type="button" class="btn btn-primary btn-xs active" show.bind="pagina > 1" click.trigger="voltar()">Voltar</button>
-        <button type="button" class="btn btn-primary btn-xs active" show.bind="pagina < 3" click.trigger="proxima()">Próxima</button>
-        <button type="submit" class="btn btn-success btn-xs active" show.bind="pagina == 3">Enviar</button>
+        <button type="submit" class="btn btn-${pagina == 3 ? 'success' : 'primary'} btn-xs active">${pagina == 3 ? 'Enviar' : 'Próxima'}</button>
         
     </form>
-    <div class="modal fade" id="myModal">
+    <div class="modal fade" id="mensagem-modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p></p>
+                    <p repeat.for="mensagem of mensagens">${mensagem}</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

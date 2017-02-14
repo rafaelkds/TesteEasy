@@ -47,6 +47,7 @@ namespace Api.Context
             modelBuilder.Entity<Candidato>().Property(c => c.BancoContaCorrente);
             modelBuilder.Entity<Candidato>().Property(c => c.BancoContaPoupanca);
             modelBuilder.Entity<Candidato>().Property(c => c.BancoConta).HasMaxLength(20);
+            modelBuilder.Entity<Candidato>().Property(c => c.LinkCrud).HasMaxLength(200);
 
             modelBuilder.Entity<Conhecimento>().Property(c => c.Ionic).IsRequired();
             modelBuilder.Entity<Conhecimento>().Property(c => c.Android).IsRequired();

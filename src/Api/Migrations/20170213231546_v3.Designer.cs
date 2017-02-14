@@ -8,7 +8,7 @@ using Api.Context;
 namespace Api.Migrations
 {
     [DbContext(typeof(EasyContext))]
-    [Migration("20170213014944_v3")]
+    [Migration("20170213231546_v3")]
     partial class v3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,7 +68,8 @@ namespace Api.Migrations
 
                     b.Property<bool>("HorasSeisAOito");
 
-                    b.Property<string>("LinkCrud");
+                    b.Property<string>("LinkCrud")
+                        .HasMaxLength(200);
 
                     b.Property<string>("Linkedin")
                         .HasMaxLength(100);

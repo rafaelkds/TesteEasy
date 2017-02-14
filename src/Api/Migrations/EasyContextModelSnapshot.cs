@@ -67,7 +67,8 @@ namespace Api.Migrations
 
                     b.Property<bool>("HorasSeisAOito");
 
-                    b.Property<string>("LinkCrud");
+                    b.Property<string>("LinkCrud")
+                        .HasMaxLength(200);
 
                     b.Property<string>("Linkedin")
                         .HasMaxLength(100);

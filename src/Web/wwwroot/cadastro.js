@@ -45,16 +45,24 @@ export class Cadastro {
     }
 
     cadastrar() {
-        if(!this.candidato.horasAteQuatro && !this.candidato.horasQuatroASeis && !this.candidato.horasSeisAOito 
-            && !this.candidato.horasAcimaDeOito && !this.candidato.horasFimDeSemana)
-        {
-            $('#myModal').modal('show');
+        if(this.pagina == 1 && $("input[name='grupo-horas']:checked").length == 0){
+            this.mensagens = ['Field "What is your willingness to work today?" is mandatory.',
+                            'Campo "Qual é sua disponibilidade para trabalhar hoje?" é obrigatório.'];
+            $('#mensagem-modal').modal('show');
             return;
         }
 
-        if(!this.candidato.periodoManha && !this.candidato.periodoTarde && !this.candidato.periodoNoite 
-            && !this.candidato.periodoMadrugada && !this.candidato.periodoComercial)
+        if(this.pagina == 1 && $("input[name='grupo-periodo']:checked").length == 0){
+            this.mensagens = ['Field "What\'s the best time to work for you?" is mandatory.',
+                            'Campo "Pra você qual é o melhor horário para trabalhar?" é obrigatório.'];
+            $('#mensagem-modal').modal('show');
             return;
+        }
+
+        if(this.pagina < 3){
+            this.pagina++;
+            return;
+        }
 
         if(!this.candidato.id) {
             new Client().post('candidato', this.candidato)
@@ -75,13 +83,7 @@ export class Cadastro {
         }
     }
 
-    proxima(){
-        this.pagina++;
-    }
-
     voltar(){
         this.pagina--;
-    }
-
-    
+    }    
 }

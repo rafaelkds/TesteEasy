@@ -17,6 +17,14 @@ namespace Api.Migrations
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
+                name: "LinkCrud",
+                table: "Candidatos",
+                maxLength: 200,
+                nullable: true,
+                oldClrType: typeof(string),
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
                 name: "Banco",
                 table: "Candidatos",
                 maxLength: 200,
@@ -33,6 +41,14 @@ namespace Api.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldMaxLength: 500,
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "LinkCrud",
+                table: "Candidatos",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldMaxLength: 200,
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
