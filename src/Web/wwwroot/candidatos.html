@@ -1,4 +1,6 @@
 ﻿<template>    
+    <require from="./mensagem.html"></require>
+
     <table class="table table-hover">
         <tr>
             <th>Opções</th>
@@ -11,7 +13,7 @@
         <tr repeat.for="pessoa of pessoas">
             <td>
                 <a role="button" class="btn btn-primary btn-xs active" href="#/editar/${pessoa.id}">Editar</a>
-                <button type="button" class="btn btn-danger btn-xs active" click.trigger="excluir(pessoa.id)">Excluir</button>
+                <button type="button" class="btn btn-danger btn-xs active" data-toggle="modal" data-target="#confirmacao-modal" click.trigger="selecionarParaExcluir(pessoa.id)">Excluir</button>
             </td>
             <td>${pessoa.id}</td>
             <td>${pessoa.nome}</td>
@@ -20,4 +22,26 @@
             <td>${pessoa.estado}</td>
         </tr>
     </table>
+
+    <div class="modal fade" id="confirmacao-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>${pergunta}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" click.trigger="excluir()">Excluir</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <mensagem mensagens.bind="mensagens"></mensagem>
 </template>

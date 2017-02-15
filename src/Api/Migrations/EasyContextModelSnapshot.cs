@@ -47,8 +47,6 @@ namespace Api.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<int>("ConhecimentoId");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(100);
@@ -102,8 +100,6 @@ namespace Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ConhecimentoId");
-
                     b.ToTable("Candidatos");
                 });
 
@@ -123,6 +119,8 @@ namespace Api.Migrations
                     b.Property<int?>("C");
 
                     b.Property<int?>("Cake");
+
+                    b.Property<int>("CandidatoId");
 
                     b.Property<int?>("Cplusplus");
 
@@ -167,14 +165,17 @@ namespace Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CandidatoId")
+                        .IsUnique();
+
                     b.ToTable("Conhecimento");
                 });
 
-            modelBuilder.Entity("Api.Entities.Candidato", b =>
+            modelBuilder.Entity("Api.Entities.Conhecimento", b =>
                 {
-                    b.HasOne("Api.Entities.Conhecimento", "Conhecimento")
-                        .WithMany()
-                        .HasForeignKey("ConhecimentoId")
+                    b.HasOne("Api.Entities.Candidato", "Candidato")
+                        .WithOne("Conhecimento")
+                        .HasForeignKey("Api.Entities.Conhecimento", "CandidatoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

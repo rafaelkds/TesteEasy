@@ -39,7 +39,6 @@ namespace Api.Context
             modelBuilder.Entity<Candidato>().Property(c => c.PeriodoComercial).IsRequired();
             modelBuilder.Entity<Candidato>().Property(c => c.Pretensao).IsRequired();
             modelBuilder.Entity<Candidato>().Property(c => c.Banco).HasMaxLength(200);
-
             modelBuilder.Entity<Candidato>().Property(c => c.BancoBeneficiario).HasMaxLength(100);
             modelBuilder.Entity<Candidato>().Property(c => c.BancoCpf).HasMaxLength(14);
             modelBuilder.Entity<Candidato>().Property(c => c.BancoNome).HasMaxLength(100);
@@ -49,6 +48,8 @@ namespace Api.Context
             modelBuilder.Entity<Candidato>().Property(c => c.BancoConta).HasMaxLength(20);
             modelBuilder.Entity<Candidato>().Property(c => c.LinkCrud).HasMaxLength(200);
 
+            modelBuilder.Entity<Conhecimento>().HasKey(c => c.Id);
+            modelBuilder.Entity<Conhecimento>().Property(c => c.CandidatoId).IsRequired();
             modelBuilder.Entity<Conhecimento>().Property(c => c.Ionic).IsRequired();
             modelBuilder.Entity<Conhecimento>().Property(c => c.Android).IsRequired();
             modelBuilder.Entity<Conhecimento>().Property(c => c.Ios).IsRequired();

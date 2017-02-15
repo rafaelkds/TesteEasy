@@ -4,8 +4,6 @@
     {
         public int Id { get; set; }
 
-        public int ConhecimentoId { get; set; }
-
         public virtual Conhecimento Conhecimento { get; set; }
 
         public string Nome { get; set; }

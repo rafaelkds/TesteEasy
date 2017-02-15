@@ -8,7 +8,7 @@ using Api.Context;
 namespace Api.Migrations
 {
     [DbContext(typeof(EasyContext))]
-    [Migration("20170213231546_v3")]
+    [Migration("20170215011633_v3")]
     partial class v3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,8 +47,6 @@ namespace Api.Migrations
                     b.Property<string>("Cidade")
                         .IsRequired()
                         .HasMaxLength(100);
-
-                    b.Property<int>("ConhecimentoId");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -103,8 +101,6 @@ namespace Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ConhecimentoId");
-
                     b.ToTable("Candidatos");
                 });
 
@@ -124,6 +120,8 @@ namespace Api.Migrations
                     b.Property<int?>("C");
 
                     b.Property<int?>("Cake");
+
+                    b.Property<int>("CandidatoId");
 
                     b.Property<int?>("Cplusplus");
 
@@ -168,14 +166,17 @@ namespace Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CandidatoId")
+                        .IsUnique();
+
                     b.ToTable("Conhecimento");
                 });
 
-            modelBuilder.Entity("Api.Entities.Candidato", b =>
+            modelBuilder.Entity("Api.Entities.Conhecimento", b =>
                 {
-                    b.HasOne("Api.Entities.Conhecimento", "Conhecimento")
-                        .WithMany()
-                        .HasForeignKey("ConhecimentoId")
+                    b.HasOne("Api.Entities.Candidato", "Candidato")
+                        .WithOne("Conhecimento")
+                        .HasForeignKey("Api.Entities.Conhecimento", "CandidatoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

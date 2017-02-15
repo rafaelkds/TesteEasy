@@ -4,6 +4,10 @@
     {
         public int Id { get; set; }
 
+        public int CandidatoId { get; set; }
+
+        public virtual Candidato Candidato { get; set; }
+
         public int Ionic { get; set; }
 
         public int Android { get; set; }

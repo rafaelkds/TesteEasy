@@ -4,6 +4,7 @@ System.config({
   transpiler: "babel",
   babelOptions: {
     "optional": [
+      "es7.decorators",
       "runtime",
       "optimisation.modules.system"
     ]

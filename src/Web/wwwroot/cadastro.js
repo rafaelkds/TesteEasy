@@ -38,7 +38,10 @@ export class Cadastro {
     activate(params) {
         if(params.id)
             new Client().get('candidato/'+params.id)
-                .then(data => this.candidato = data.data)
+                .then(data => {
+                    console.log(data);
+                    this.candidato = data.data;
+                })
                 .catch(data => {
                     console.log(data)
                 });
@@ -46,16 +49,14 @@ export class Cadastro {
 
     cadastrar() {
         if(this.pagina == 1 && $("input[name='grupo-horas']:checked").length == 0){
-            this.mensagens = ['Field "What is your willingness to work today?" is mandatory.',
-                            'Campo "Qual é sua disponibilidade para trabalhar hoje?" é obrigatório.'];
-            $('#mensagem-modal').modal('show');
+            this.exibirMensagem(['Field "What is your willingness to work today?" is mandatory.',
+                            'Campo "Qual é sua disponibilidade para trabalhar hoje?" é obrigatório.']);
             return;
         }
 
         if(this.pagina == 1 && $("input[name='grupo-periodo']:checked").length == 0){
-            this.mensagens = ['Field "What\'s the best time to work for you?" is mandatory.',
-                            'Campo "Pra você qual é o melhor horário para trabalhar?" é obrigatório.'];
-            $('#mensagem-modal').modal('show');
+            this.exibirMensagem(['Field "What\'s the best time to work for you?" is mandatory.',
+                            'Campo "Pra você qual é o melhor horário para trabalhar?" é obrigatório.']);
             return;
         }
 
@@ -68,6 +69,7 @@ export class Cadastro {
             new Client().post('candidato', this.candidato)
                 .then(data => {
                     console.log(data);
+                    this.exibirMensagem(['Cadastro enviado.']);
                 })
                 .catch(data => {
                     console.log(data);
@@ -76,6 +78,7 @@ export class Cadastro {
             new Client().put('candidato/'+this.candidato.id, this.candidato)
                 .then(data => {
                     console.log(data);
+                    this.exibirMensagem(['Cadastro atualizado.']);
                 })
                 .catch(data => {
                     console.log(data);
@@ -85,5 +88,10 @@ export class Cadastro {
 
     voltar(){
         this.pagina--;
-    }    
+    }
+
+    exibirMensagem(msg){
+        this.mensagens = msg;
+        $('#mensagem-modal').modal('show');
+    }
 }
