@@ -1,4 +1,4 @@
-﻿import {Client} from './client';
+import {Client} from './client';
 
 export class Candidatos {
 
@@ -11,7 +11,7 @@ export class Candidatos {
             .then(data => {
                 console.log(data);
                 this.buscarCandidatos();
-                this.exibirMensagem(['Candidato excluido.']);
+                this.exibirMensagem(['Candidato excluído.']);
             })
             .catch(data => {
                 console.log(data)

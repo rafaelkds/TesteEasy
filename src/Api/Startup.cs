@@ -53,7 +53,9 @@ namespace Api
                        .AllowAnyHeader();
             }));
 
-            services.AddMvc();            
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             services.AddDbContext<EasyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EasyDatabase")));
         }
