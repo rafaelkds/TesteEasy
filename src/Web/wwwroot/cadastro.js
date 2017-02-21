@@ -43,7 +43,8 @@ export class Cadastro {
                     this.candidato = data.data;
                 })
                 .catch(data => {
-                    console.log(data)
+                    console.log(data);
+                    this.exibirMensagem(['Erro ao buscar dados do candidato.']);
                 });
     }
 
@@ -73,6 +74,7 @@ export class Cadastro {
                 })
                 .catch(data => {
                     console.log(data);
+                    this.exibirMensagem(['Erro ao enviar cadastro.']);
                 });
         } else {
             new Client().put('candidato/'+this.candidato.id, this.candidato)
@@ -82,6 +84,7 @@ export class Cadastro {
                 })
                 .catch(data => {
                     console.log(data);
+                    this.exibirMensagem(['Erro ao atualizar o cadastro.']);
                 });
         }
     }

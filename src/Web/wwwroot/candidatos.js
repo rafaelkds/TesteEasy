@@ -1,4 +1,4 @@
-import {Client} from './client';
+﻿import {Client} from './client';
 
 export class Candidatos {
 
@@ -14,7 +14,8 @@ export class Candidatos {
                 this.exibirMensagem(['Candidato excluído.']);
             })
             .catch(data => {
-                console.log(data)
+                console.log(data);
+                this.exibirMensagem(['Erro ao excluir candidato.']);
             });
     }
 
@@ -32,7 +33,8 @@ export class Candidatos {
         new Client().get('candidato')
             .then(data => this.pessoas = data.data)
             .catch(data => {
-                console.log(data)
+                console.log(data);
+                this.exibirMensagem(['Erro ao buscar candidatos.']);
             });
     }
 }
