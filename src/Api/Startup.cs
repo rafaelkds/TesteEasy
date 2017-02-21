@@ -101,6 +101,11 @@ namespace Api
             app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseMvc();
+            
+            using (var context = (EasyContext)app.ApplicationServices.GetService(typeof(EasyContext)))
+            {
+                context.Database.Migrate();
+            }
         }
     }
 }
