@@ -185,10 +185,10 @@
     "aurelia-task-queue": "npm:aurelia-task-queue@^1.0.0",
     "aurelia-templating": "npm:aurelia-templating@^1.0.0"
   },
-  "npm:aurelia-fetch-client@1.1.0": {},
   "npm:aurelia-http-client@1.0.4": {
     "aurelia-pal": "npm:aurelia-pal@^1.0.0",
     "aurelia-path": "npm:aurelia-path@^1.0.0"
   },
-  "npm:jquery@3.1.1": {}
+  "npm:jquery@3.1.1": {},
+  "npm:aurelia-fetch-client@1.1.0": {}
 }
