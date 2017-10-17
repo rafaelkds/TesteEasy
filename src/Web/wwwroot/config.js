@@ -4,7 +4,6 @@ System.config({
   transpiler: "babel",
   babelOptions: {
     "optional": [
-      "es7.decorators",
       "runtime",
       "optimisation.modules.system"
     ]
@@ -18,12 +17,10 @@ System.config({
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@2.1.1",
     "aurelia-fetch-client": "npm:aurelia-fetch-client@1.1.3",
     "aurelia-framework": "npm:aurelia-framework@1.1.5",
-    "aurelia-http-client": "npm:aurelia-http-client@1.0.4",
     "aurelia-pal-browser": "npm:aurelia-pal-browser@1.3.0",
     "babel": "npm:babel-core@5.8.38",
     "babel-runtime": "npm:babel-runtime@5.8.38",
     "core-js": "npm:core-js@1.2.7",
-    "jquery": "npm:jquery@3.1.1",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
     },
@@ -91,10 +88,6 @@ System.config({
     "npm:aurelia-history-browser@1.1.0": {
       "aurelia-history": "npm:aurelia-history@1.1.0",
       "aurelia-pal": "npm:aurelia-pal@1.4.0"
-    },
-    "npm:aurelia-http-client@1.0.4": {
-      "aurelia-pal": "npm:aurelia-pal@1.4.0",
-      "aurelia-path": "npm:aurelia-path@1.1.1"
     },
     "npm:aurelia-loader-default@1.0.3": {
       "aurelia-loader": "npm:aurelia-loader@1.0.0",
