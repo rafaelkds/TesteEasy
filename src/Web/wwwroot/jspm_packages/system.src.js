@@ -1,5 +1,5 @@
 /*
- * SystemJS v0.19.47
+ * SystemJS v0.19.46
  */
 (function() {
 function bootstrap() {// from https://gist.github.com/Yaffle/1088850
@@ -848,7 +848,7 @@ function logloads(loads) {
       var loader = this._loader;
       if (loader.modules[name])
         return Promise.resolve();
-      return (loader.importPromises[name] || createImportPromise(this, name, new Promise(asyncStartLoadPartwayThrough({
+      return loader.importPromises[name] || createImportPromise(this, name, new Promise(asyncStartLoadPartwayThrough({
         step: 'locate',
         loader: loader,
         moduleName: name,
@@ -856,11 +856,9 @@ function logloads(loads) {
         moduleSource: undefined,
         moduleAddress: undefined
       }))
-      .then(function(load) {
+      .then(function() {
         delete loader.importPromises[name];
-        return load.module.module;
-      })))
-      .then(function () {});
+      }));
     },
     // 26.3.3.11
     module: function(source, options) {
@@ -5114,7 +5112,7 @@ hookConstructor(function(constructor) {
 System = new SystemJSLoader();
 
 __global.SystemJS = System;
-System.version = '0.19.47 Standard';
+System.version = '0.19.46 Standard';
   if (typeof module == 'object' && module.exports && typeof exports == 'object')
     module.exports = System;
 
