@@ -54,7 +54,7 @@ export class Client {
 function criar(){
     let client = new HttpClient();
     client.configure(config => {
-        config.withBaseUrl('http://localhost:56567/api/');
+        config.withBaseUrl('http://localhost:57251/api/');
     });
     return client;
 }
